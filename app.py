@@ -10,8 +10,14 @@ app = Flask(__name__)
 def index():
     if request.method == "POST":
         country_input = request.form["country"]
-        country_input_modified = request.form["country"].lower().replace(" ", "-")
+        country_input_modified = request.form["country"].lower().replace(
+            " ", "-")
         state_input = request.form["state"]
+        graph_data = {}
+        graph_data["Cases"] = []
+
+        growth_over_time_api = requests.get(
+            "https://api.covid19api.com/total/dayone/country/%s" % (country_input_modified)).json()
         country_covid_api = requests.get(
             "https://api.covid19api.com/summary").json()
 
@@ -21,8 +27,8 @@ def index():
         countryCovidInformation = None
         stateCovidInformation = None
         # exceptions
+
         if(country_input == "United States"):
-            
             country_input = "United States of America"
 
         for i in country_covid_api["Countries"]:
@@ -31,14 +37,19 @@ def index():
 
         for i in state_covid_api:
             if(i['Province'] == state_input):
-                stateCovidInformation = i; 
+                stateCovidInformation = i
+
+        if(countryCovidInformation):
+            for i in growth_over_time_api:
+                graph_data["Cases"].append({
+                    'confirmed': i['Confirmed'],
+                    'date': i['Date']
+                })
 
         if(countryCovidInformation and stateCovidInformation):
-            return render_template("find.html", apiConnection=True, countrySearch=True, stateSearch=True, countryCovidInformation=countryCovidInformation, stateCovidInformation=stateCovidInformation)
+            return render_template("find.html", apiConnection=True, countrySearch=True, stateSearch=True, countryCovidInformation=countryCovidInformation, stateCovidInformation=stateCovidInformation, graph_data=graph_data)
         elif(countryCovidInformation):
-            return render_template("find.html", apiConnection=True, countrySearch=True, countryCovidInformation=countryCovidInformation)
-        elif(stateCovidInformation):
-            return render_template("find.html", apiConnection=True, stateSearch=True, stateCovidInformation=stateCovidInformation)
+            return render_template("find.html", apiConnection=True, countrySearch=True, countryCovidInformation=countryCovidInformation, graph_data=graph_data)
         else:
             return render_template('find.html', apiConnectionFailed=True)
     return render_template("find.html")

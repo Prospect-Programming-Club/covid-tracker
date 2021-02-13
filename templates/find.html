@@ -22,15 +22,33 @@
                 <p>Total Deaths: {{ countryCovidInformation['TotalDeaths'] }}</p>
                 <p>New Recovered: {{ countryCovidInformation['NewRecovered'] }}</p>
                 <p>Total Recovered: {{ countryCovidInformation['TotalRecovered'] }}</p>
-                <p>Accurate as of: {{ countryCovidInformation['Date'] }}</p>
+                <p>Accurate as of: {{ countryCovidInformation['Date'][0:10] }}</p>
             {% endif %}
             {% if stateSearch %}
                 <h1>State COVID-19 Information for {{ stateCovidInformation['Province'] }}</h1>
                 <p>Total Confirmed Cases: {{ stateCovidInformation['Confirmed'] }}</p>
                 <p>Total Deaths: {{ stateCovidInformation['Deaths'] }}</p>
                 <p>Total Recovered: {{ stateCovidInformation['Recovered'] }}</p>
-                <p>Accurate as of: {{ stateCovidInformation['Date'] }}</p>
+                <p>Accurate as of: {{ stateCovidInformation['Date'][0:10] }}</p>
             {% endif %}
+            <h1>Graph of COVID-19 Case Trend in {{ countryCovidInformation['Country'] }} (Past 100 Days)</h1>
+            <div style="background-color: white" class="ct-chart ct-perfect-fourth"></div>
+            <script>
+                var myLabels = []; 
+                var mySeries = []; 
+                const mydata = JSON.parse('{{ graph_data|tojson }}');
+                for(let i = mydata['Cases'].length-100; i < mydata['Cases'].length; i++){
+                    myLabels.push(""); //mydata['Cases'][i]['date'].substring(0, 10));
+                    mySeries.push(mydata['Cases'][i]['confirmed']);
+                }
+                var data = {
+                    labels: myLabels,
+                    series: [
+                        mySeries
+                    ]
+                };
+                new Chartist.Line('.ct-chart', data);
+            </script>
         {% endif %}
         {% if apiConnectionFailed %}
             <p>Country Doesn't Exist in API!</p>
