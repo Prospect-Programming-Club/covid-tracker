@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
     <form action="#" method="POST">
-        <select name="state" class="states" id="stateId" required>
+        <select name="state" class="states" id="stateId">
             <option value="">Select State</option>
         </select>
         <select name="country" class="countries" id="countryId" required>
@@ -14,14 +14,21 @@
 
         {% if apiConnection %}
             {% if countrySearch %}
-                <h1>COVID-19 Information for {{ covidInformation['Country'] }}</h1>
-                <p>New Confirmed Cases: {{ covidInformation['NewConfirmed'] }}</p>
-                <p>Total Confirmed Cases: {{ covidInformation['TotalConfirmed'] }}</p>
-                <p>New Deaths: {{ covidInformation['NewDeaths'] }}</p>
-                <p>Total Deaths: {{ covidInformation['TotalDeaths'] }}</p>
-                <p>New Recovered: {{ covidInformation['NewRecovered'] }}</p>
-                <p>Total Recovered: {{ covidInformation['TotalRecovered'] }}</p>
-                <p>Accurate as of: {{ covidInformation['Date'] }}</p>
+                <h1>Country COVID-19 Information for {{ countryCovidInformation['Country'] }}</h1>
+                <p>New Confirmed Cases: {{ countryCovidInformation['NewConfirmed'] }}</p>
+                <p>Total Confirmed Cases: {{ countryCovidInformation['TotalConfirmed'] }}</p>
+                <p>New Deaths: {{ countryCovidInformation['NewDeaths'] }}</p>
+                <p>Total Deaths: {{ countryCovidInformation['TotalDeaths'] }}</p>
+                <p>New Recovered: {{ countryCovidInformation['NewRecovered'] }}</p>
+                <p>Total Recovered: {{ countryCovidInformation['TotalRecovered'] }}</p>
+                <p>Accurate as of: {{ countryCovidInformation['Date'] }}</p>
+            {% endif %}
+            {% if stateSearch %}
+                <h1>State COVID-19 Information for {{ stateCovidInformation['Province'] }}</h1>
+                <p>Total Confirmed Cases: {{ stateCovidInformation['Confirmed'] }}</p>
+                <p>Total Deaths: {{ stateCovidInformation['Deaths'] }}</p>
+                <p>Total Recovered: {{ stateCovidInformation['Recovered'] }}</p>
+                <p>Accurate as of: {{ stateCovidInformation['Date'] }}</p>
             {% endif %}
         {% endif %}
         {% if apiConnectionFailed %}
