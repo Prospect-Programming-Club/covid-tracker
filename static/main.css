@@ -11,12 +11,19 @@ body {
 
 .info {
     color:aqua;
+    font-size:25px;
 }
 
 .localinfo {
     color:aqua;
+    font-size:25px;
 }
 
 .covid {
     color:aqua;
+    font-size:25px;
+}
+.covidinfo {
+    color:red;
+    
 }

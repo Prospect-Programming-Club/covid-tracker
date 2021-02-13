@@ -4,17 +4,18 @@
 {% endblock %}
 {% block content %}
     <form action="#" method="POST">
-        <select name="state" class="states" id="stateId">
-            <option value="">Select State</option>
-        </select>
+        
         <select name="country" class="countries" id="countryId" required>
             <option value="">Select Country</option>
+        </select>
+        <select name="state" class="states" id="stateId">
+            <option value="">Select State</option>
         </select>
         <input type="submit" name="submit">
 
         {% if apiConnection %}
             {% if countrySearch %}
-                <h1>Country COVID-19 Information for {{ countryCovidInformation['Country'] }}</h1>
+                <h1 class="covidinfo">Country COVID-19 Information for {{ countryCovidInformation['Country'] }}</h1>
                 <p>New Confirmed Cases: {{ countryCovidInformation['NewConfirmed'] }}</p>
                 <p>Total Confirmed Cases: {{ countryCovidInformation['TotalConfirmed'] }}</p>
                 <p>New Deaths: {{ countryCovidInformation['NewDeaths'] }}</p>
