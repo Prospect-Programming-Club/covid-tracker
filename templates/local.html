@@ -4,46 +4,59 @@
 {% endblock %}
 {% block content %}
 
-<html lang="en">
-
-    <h1 id="demo"></h1>
-    <script>
-        var x = document.getElementById("demo");
+    <h1 id="location"></h1>
+    <h1 id="latlng" value="37.284238599999995,-121.98306219999999"></h1>
+    <script type="text/javascript">
+        var x = document.getElementById("location");
         function getLocation() {
             if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } 
+            else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
             }
-        }
-        
-        function showPosition(position) {
-            x.innerHTML = "Latitude: " + position.coords.latitude +
-            "<br>Longitude: " + position.coords.longitude;
-            
+
         }
 
-        function GetAddress() {
-            var lat = parseFloat(document.getElementById("#yourinputlat").value);
-            var lng = parseFloat(document.getElementById("#yourinputlon").value);
+        function getLatitude(position){
+            var lat = position.coords.latitude;
+            return lat;
+
+        }
+
+        function getLongitude(position){
+            var log = position.coords.longitude;
+            return log;
+
+        }
+
+        function showPosition(position) {
+            x.innerHTML = "Latitude: " + getLatitude(position) + "<br>Longitude: " + getLongitude(position);
+
+        }
+
+        <!-- Needs modification in this function -->
+        function getReverseGeocodingData(lat, lng) {
             var latlng = new google.maps.LatLng(lat, lng);
-            var geocoder = geocoder = new google.maps.Geocoder();
-            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+            // This is making the Geocode request
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'latLng': latlng },  (results, status) =>{
+                if (status !== google.maps.GeocoderStatus.OK) {
+                    alert(status);
+                }
+                // This is checking to see if the Geoeode Status is OK before proceeding
                 if (status == google.maps.GeocoderStatus.OK) {
-                    if (results[1]) {
-                        alert("Location: " + results[1].formatted_address);
-                    }
+                    console.log(results);
+                    var address = (results[0].formatted_address);
                 }
             });
+
         }
 
         getLocation();
         showPosition();
-        
-        GetAddress();
-        </script>
-
-</html>
-
+        getReverseGeocodingData(getLatitude("37.2842319", "-121.98296149999999"))
+    
+    </script>
 
 {% endblock %}
