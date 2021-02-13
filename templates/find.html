@@ -3,4 +3,24 @@
     <title>Search COVID-19 Info</title>
 {% endblock %}
 {% block content %}
+    <form action="#" method="POST">
+        <select name="country" class="countries" id="countryId" required>
+            <option value="">Select Country</option>
+        </select><br>
+        <input type="submit" name="submit">
+
+        {% if apiConnection %}
+            <h1>COVID-19 Information for {{ covidInformation['Country'] }}</h1>
+            <p>New Confirmed Cases: {{ covidInformation['NewConfirmed'] }}</p>
+            <p>Total Confirmed Cases: {{ covidInformation['TotalConfirmed'] }}</p>
+            <p>New Deaths: {{ covidInformation['NewDeaths'] }}</p>
+            <p>Total Deaths: {{ covidInformation['TotalDeaths'] }}</p>
+            <p>New Recovered: {{ covidInformation['NewRecovered'] }}</p>
+            <p>Total Recovered: {{ covidInformation['TotalRecovered'] }}</p>
+            <p>Accurate as of: {{ covidInformation['Date'] }}</p>
+        {% endif %}
+        {% if apiConnectionFailed %}
+            <p>Country Doesn't Exist in API!</p>
+        {% endif %}
+    </form>
 {% endblock %}
