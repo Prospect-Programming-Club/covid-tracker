@@ -3,4 +3,47 @@
 <title>COVID-19 Info Near You</title>
 {% endblock %}
 {% block content %}
+
+<html lang="en">
+
+    <h1 id="demo"></h1>
+    <script>
+        var x = document.getElementById("demo");
+        function getLocation() {
+            if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+        
+        function showPosition(position) {
+            x.innerHTML = "Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude;
+            
+        }
+
+        function GetAddress() {
+            var lat = parseFloat(document.getElementById("#yourinputlat").value);
+            var lng = parseFloat(document.getElementById("#yourinputlon").value);
+            var latlng = new google.maps.LatLng(lat, lng);
+            var geocoder = geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        alert("Location: " + results[1].formatted_address);
+                    }
+                }
+            });
+        }
+
+        getLocation();
+        showPosition();
+        
+        GetAddress();
+        </script>
+
+</html>
+
+
 {% endblock %}
