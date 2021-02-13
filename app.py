@@ -10,19 +10,25 @@ app = Flask(__name__)
 def index():
     if request.method == "POST":
         country_input = request.form["country"]
+        state_input = request.form["state"]
         country_covid_api = requests.get(
             "https://api.covid19api.com/summary").json()
+
+        state_covid_api = requests.get(
+            "https://api.covidtracking.com/v1/states/%s").json()
 
         covidInformation = None
         # exceptions
         if(country_input == "United States"):
             country_input = "United States of America"
 
+        print(state_covid_api)
+
         for i in country_covid_api["Countries"]:
             if(i['Country'] == country_input):
                 covidInformation = i
         if(covidInformation):
-            return render_template('find.html', apiConnection=True, covidInformation=covidInformation)
+            return render_template("find.html", apiConnection=True, countrySearch=True, covidInformation=covidInformation)
         else:
             return render_template('find.html', apiConnectionFailed=True)
     return render_template("find.html")
