@@ -6,24 +6,23 @@ body {
 }
 
 .safety {
-    color:red;
+  color: red;
 }
 
 .info {
-    color:aqua;
-    font-size:25px;
+  color: aqua;
+  font-size: 25px;
 }
 
 .localinfo {
-    color:aqua;
-    font-size:25px;
+  color: aqua;
+  font-size: 25px;
 }
 
 .covid {
-    color:aqua;
-    font-size:25px;
+  color: aqua;
+  font-size: 25px;
 }
 .covidinfo {
-    color:red;
-    
+  color: red;
 }
