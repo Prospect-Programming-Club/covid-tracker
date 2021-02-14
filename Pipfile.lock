@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d0746b770895a98c5cb73cb7dc23338741a67ad361485e1e973261ab0ccb04c6"
+            "sha256": "9a0539546af8004fd1828d36dadde752142ed2277cbd7ad0f1ce7bf4eff8cb71"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -39,6 +39,13 @@
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
             "version": "==7.1.2"
         },
+        "decorator": {
+            "hashes": [
+                "sha256:41fa54c2a0cc4ba648be4fd43cff00aedf5b9465c9bf18d64325bc225f08f760",
+                "sha256:e3a62f0520172440ca0dcc823749319382e377f37f140a0b99ef45fecb84bfe7"
+            ],
+            "version": "==4.4.2"
+        },
         "flask": {
             "hashes": [
                 "sha256:4efa1ae2d7c9865af48986de8aeb8504bf32c7f3d6fdc9353d34b21f4b127060",
@@ -46,6 +53,21 @@
             ],
             "index": "pypi",
             "version": "==1.1.2"
+        },
+        "future": {
+            "hashes": [
+                "sha256:b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d"
+            ],
+            "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==0.18.2"
+        },
+        "geocoder": {
+            "hashes": [
+                "sha256:a733e1dfbce3f4e1a526cac03aadcedb8ed1239cf55bd7f3a23c60075121a834",
+                "sha256:c9925374c961577d0aee403b09e6f8ea1971d913f011f00ca70c76beaf7a77e7"
+            ],
+            "index": "pypi",
+            "version": "==1.38.1"
         },
         "geographiclib": {
             "hashes": [
@@ -151,6 +173,13 @@
             "index": "pypi",
             "version": "==20.7.3"
         },
+        "ratelim": {
+            "hashes": [
+                "sha256:826d32177e11f9a12831901c9fda6679fd5bbea3605910820167088f5acbb11d",
+                "sha256:e1a7dd39e6b552b7cc7f52169cd66cdb826a1a30198e355d7016012987c9ad08"
+            ],
+            "version": "==0.1.6"
+        },
         "requests": {
             "hashes": [
                 "sha256:27973dd4a904a4f13b263a19c866c13b92a39ed1c964655f025f3f8d3d75b804",
@@ -209,6 +238,14 @@
             ],
             "index": "pypi",
             "version": "==3.17.2"
+        },
+        "six": {
+            "hashes": [
+                "sha256:30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259",
+                "sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==1.15.0"
         },
         "urllib3": {
             "hashes": [
