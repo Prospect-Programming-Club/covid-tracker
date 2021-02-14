@@ -9,6 +9,7 @@ flask = "*"
 pycountry = "*"
 geopy = "*"
 geocoder = "*"
+gunicorn = "*"
 
 [dev-packages]
 
