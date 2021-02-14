@@ -49,3 +49,8 @@ a:hover {
 #redirect-cdc:hover {
   color: #ffb2b2;
 }
+
+.location-div {
+  position: relative;
+  margin-top: 10px;
+}

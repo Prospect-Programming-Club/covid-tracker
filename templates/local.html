@@ -3,5 +3,40 @@
 <title>COVID-19 Info Near You</title>
 {% endblock %}
 {% block content %}
-
+    {% if session['countryCovidInformation'] %}
+        <div class="info-div">
+            {% with countryCovidInformation=session['countryCovidInformation'] %}
+                <h1>{{ countryCovidInformation['Country'] }} COVID-19 Live</h1>
+                <p>New Confirmed Cases: {{ countryCovidInformation['NewConfirmed'] }}</p>
+                <p>Total Confirmed Cases: {{ countryCovidInformation['TotalConfirmed'] }}</p>
+                <p>New Deaths: {{ countryCovidInformation['NewDeaths'] }}</p>
+                <p>Total Deaths: {{ countryCovidInformation['TotalDeaths'] }}</p>
+                <p>New Recovered: {{ countryCovidInformation['NewRecovered'] }}</p>
+                <p>Total Recovered: {{ countryCovidInformation['TotalRecovered'] }}</p>
+                <p>Accurate as of: {{ countryCovidInformation['Date'][0:10] }}</p>
+            {% endwith %}
+        </div>
+        <div class="info-div">
+            {% with stateCovidInformation=session['stateCovidInformation'] %}
+                <h1>{{ stateCovidInformation['Province'] }} COVID-19 Live</h1>
+                <p>Total Confirmed Cases: {{ stateCovidInformation['Confirmed'] }}</p>
+                <p>Total Deaths: {{ stateCovidInformation['Deaths'] }}</p>
+                <p>Total Recovered: {{ stateCovidInformation['Recovered'] }}</p>
+                <p>Accurate as of: {{ stateCovidInformation['Date'][0:10] }}</p>
+            {% endwith %}
+        </div>
+        <div class="location-link">
+            <center><a href="{{ url_for('change_location') }}">Change Location</a></center>
+        </div>
+    {% else %}
+        <form action="#" method="POST" class="searchbar">
+            <select name="country" class="countries" id="countryId" required>
+                <option value="">Set Country</option>
+            </select>
+            <select name="state" class="states" id="stateId" required>
+                <option value="">Set State</option>
+            </select>
+            <input type="submit" name="Search" value="Set">
+        </form>
+    {% endif %}
 {% endblock %}
