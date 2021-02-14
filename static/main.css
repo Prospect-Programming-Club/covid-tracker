@@ -1,28 +1,51 @@
 body {
-  color: white;
-  background-color: black;
-  margin: auto;
+  color: #f2f2f2;
+  background-color: #6746c3;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+a:hover {
+  color: #f2f2f2;
+}
+.searchbar {
+  position: relative;
+  width: 50%;
+  left: 35%;
+}
+
+.footer {
+  position: relative;
+  top: 30%;
+  text-align: center;
+  background-color: #ffb2b2;
+}
+.info-div {
+  position: relative;
+  background-color: #212121;
+  box-shadow: 3px 3px 2px #000000;
+  width: 63%;
+  left: 20%;
+  margin-top: 10px;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .safety {
   color: red;
 }
 
-.info {
-  color: aqua;
-  font-size: 25px;
+#redirect-cdc {
+  color: white;
 }
 
-.localinfo {
-  color: aqua;
-  font-size: 25px;
-}
-
-.covid {
-  color: aqua;
-  font-size: 25px;
-}
-.covidinfo {
-  color: red;
+#redirect-cdc:hover {
+  color: #ffb2b2;
 }

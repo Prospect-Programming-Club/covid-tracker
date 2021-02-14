@@ -3,19 +3,19 @@
     <title>Search COVID-19 Info</title>
 {% endblock %}
 {% block content %}
-    <form action="#" method="POST">
-        
+    <form action="#" method="POST" class="searchbar">
         <select name="country" class="countries" id="countryId" required>
             <option value="">Select Country</option>
         </select>
         <select name="state" class="states" id="stateId">
             <option value="">Select State</option>
         </select>
-        <input type="submit" name="submit">
-
-        {% if apiConnection %}
-            {% if countrySearch %}
-                <h1 class="covidinfo">Country COVID-19 Information for {{ countryCovidInformation['Country'] }}</h1>
+        <input type="submit" name="Search" value="Search">
+    </form>
+    {% if apiConnection %}
+        {% if countrySearch %}
+            <div class="info-div">
+                <h1>{{ countryCovidInformation['Country'] }} COVID-19 Live</h1>
                 <p>New Confirmed Cases: {{ countryCovidInformation['NewConfirmed'] }}</p>
                 <p>Total Confirmed Cases: {{ countryCovidInformation['TotalConfirmed'] }}</p>
                 <p>New Deaths: {{ countryCovidInformation['NewDeaths'] }}</p>
@@ -23,35 +23,39 @@
                 <p>New Recovered: {{ countryCovidInformation['NewRecovered'] }}</p>
                 <p>Total Recovered: {{ countryCovidInformation['TotalRecovered'] }}</p>
                 <p>Accurate as of: {{ countryCovidInformation['Date'][0:10] }}</p>
-            {% endif %}
-            {% if stateSearch %}
-                <h1>State COVID-19 Information for {{ stateCovidInformation['Province'] }}</h1>
+            </div>
+        {% endif %}
+        {% if stateSearch %}
+            <div class="info-div">
+                <h1>{{ stateCovidInformation['Province'] }} COVID-19 Live</h1>
                 <p>Total Confirmed Cases: {{ stateCovidInformation['Confirmed'] }}</p>
                 <p>Total Deaths: {{ stateCovidInformation['Deaths'] }}</p>
                 <p>Total Recovered: {{ stateCovidInformation['Recovered'] }}</p>
                 <p>Accurate as of: {{ stateCovidInformation['Date'][0:10] }}</p>
-            {% endif %}
-            <h1>Graph of COVID-19 Case Trend in {{ countryCovidInformation['Country'] }} (Past 100 Days)</h1>
-            <div style="background-color: white" class="ct-chart ct-perfect-fourth"></div>
-            <script>
-                var myLabels = []; 
-                var mySeries = []; 
-                const mydata = JSON.parse('{{ graph_data|tojson }}');
-                for(let i = mydata['Cases'].length-100; i < mydata['Cases'].length; i++){
-                    myLabels.push(""); //mydata['Cases'][i]['date'].substring(0, 10));
-                    mySeries.push(mydata['Cases'][i]['confirmed']);
-                }
-                var data = {
-                    labels: myLabels,
-                    series: [
-                        mySeries
-                    ]
-                };
-                new Chartist.Line('.ct-chart', data);
-            </script>
+            </div>
         {% endif %}
-        {% if apiConnectionFailed %}
-            <p>Country Doesn't Exist in API!</p>
-        {% endif %}
-    </form>
+    <div class="info-div">
+        <h1>COVID-19 Case Trend in {{ countryCovidInformation['Country'] }} (Past 100 Days)</h1>
+        <div style="background-color: white" class="ct-chart ct-perfect-fourth"></div>
+    </div>
+    <script>
+        var myLabels = [];
+        var mySeries = [];
+        const mydata = JSON.parse('{{ graph_data|tojson }}');
+        for (let i = mydata['Cases'].length - 100; i < mydata['Cases'].length; i++) {
+            myLabels.push(""); //mydata['Cases'][i]['date'].substring(0, 10));
+            mySeries.push(mydata['Cases'][i]['confirmed']);
+        }
+        var data = {
+            labels: myLabels,
+            series: [
+                mySeries
+            ]
+        };
+        new Chartist.Line('.ct-chart', data);
+    </script>
+    {% endif %}
+    {% if apiConnectionFailed %}
+        <p>Country Doesn't Exist in API!</p>
+    {% endif %}
 {% endblock %}

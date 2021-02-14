@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, flash
 import requests
 import json
-import pycountry
 
 app = Flask(__name__)
 
@@ -57,7 +56,9 @@ def index():
 
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    world_covid_api = requests.get(
+        "https://api.covid19api.com/world/total").json()
+    return render_template("about.html", worldCovidInformation=world_covid_api)
 
 
 @app.route("/local")

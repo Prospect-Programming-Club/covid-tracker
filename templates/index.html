@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
@@ -11,9 +13,9 @@
     {% block title %}{% endblock %}
 </head>
 <body>
-    <a href="{{ url_for('index') }}" class="info">Search COVID-19 Information</a> <br>
-    <a href="{{ url_for('local') }}" class="localinfo">See COVID-19 Information in Local Area</a> <br>
-    <a href="{{ url_for('about') }}" class="covid">About COVID-19</a>
+    <a href="{{ url_for('index') }}">Search COVID-19 Information</a> <br>
+    <a href="{{ url_for('local') }}">See COVID-19 Information in Local Area</a> <br>
+    <a href="{{ url_for('about') }}">About COVID-19</a>
     {% block content %}{% endblock %}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
